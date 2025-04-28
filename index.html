@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Life Old Age Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #e6e6e6; /* Light grey for text */
+        }
+
+        header {
+            background: linear-gradient(90deg, #0a1d37, #3b4a6b); /* Navy blue to lighter navy */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 40px;
+        }
+
+        .logo {
+            width: 100px; /* Fixed to minimum 150px as requested */
+            height: auto;
+            transition: transform 0.3s;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #f5f5f5; /* Off-white for nav links */
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #000; /* Gold accent for hover */
+            transform: scale(1.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8em;
+            color: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .hero {
+            background: url('https://media.istockphoto.com/id/475085171/photo/large-group-of-multi-ethnic-people-cheering-with-arms-raised.jpg?s=612x612&w=0&k=20&c=oBpgNz6LGqmVovLNVXQiJJz6PMpB4p41hDgRB_q09aM=') no-repeat center center/cover;
+            color: #000;
+            height: 80vh;
+            position: relative;
+            padding: 80px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 29, 55, 0.7); /* Navy blue overlay */
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 72px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            color: #fff; /* Gold for heading */
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #c0c0c0; /* Light silver for text */
+        }
+
+        .hero-content img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 12px;
+            margin: 15px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #00bcd4; /* Cyan accent */
+            color: #000;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+            border: 2px solid #26c6da; /* Slightly lighter cyan border */
+        }
+
+        .cta-button:hover {
+            background: #26c6da; /* Lighter cyan on hover */
+            transform: translateY(-3px);
+        }
+
+        .about, .services, .blog, .contact {
+            max-width: 1500px;
+            position: relative;
+            padding: 20px;
+            margin: 20px auto;
+        }
+
+        .about h2, .services h2, .blog h2, .contact h2 {
+            color: #000; /* Gold for headings */
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .about p, .services p, .blog p, .contact p {
+            color: #c0c0c0; /* Light silver for text */
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .about img {
+            flex: 1;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            margin: 0;
+        }
+
+        .services {
+            color: #000;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .services-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1b263b, #2e3a5a); /* Navy blue gradient for cards */
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #00bcd4; /* Cyan border */
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 188, 212, 0.3); /* Cyan shadow */
+        }
+
+        .service-card h3 {
+            color: #00bcd4; /* Gold for headings */
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #00bcd4;
+        }
+
+        .service-card p {
+            color: #c0c0c0;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .blog-card {
+            background: linear-gradient(135deg, #1b263b, #2e3a5a);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            border: 2px solid #00bcd4;
+        }
+
+        .blog-card:hover {
+            transform: scale(1.03);
+        }
+
+        .blog-card h3 {
+            color: #00bcd4;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #00bcd4;
+        }
+
+        .blog-card p {
+            color: #c0c0c0;
+        }
+
+        .contact {
+            padding: 40px;
+            border: 2px solid #00bcd4;
+        }
+
+        .contact-map {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #00bcd4;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #c0c0c0;
+        }
+
+        .contact-form button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #00bcd4;
+            color: #000;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: 2px solid #26c6da;
+        }
+
+        .contact-form button:hover {
+            background: #26c6da;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #0a1d37, #3b4a6b); /* Navy blue gradient */
+            color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            border-top: 2px solid #00bcd4;
+        }
+
+        footer img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px auto;
+            border: 2px solid #00bcd4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(90deg, #0a1d37, #3b4a6b);
+                padding: 20px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .logo {
+                width: 150px; /* Maintains minimum 150px on mobile */
+            }
+
+            .hero-content h1 {
+                font-size: 2em;
+            }
+
+            .hero-content p {
+                font-size: 1em;
+            }
+
+            .hero-content img {
+                max-width: 300px;
+            }
+
+            .about h2, .services h2, .blog h2, .contact h2 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 30px 15px;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+
+            .about img {
+                margin-top: 20px;
+            }
+
+            .services-grid, .blog-posts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 150px; /* Ensures minimum 150px on smaller screens */
+            }
+
+            .hero-content h1 {
+                font-size: 1.6em;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .service-card img, .blog-card img {
+                height: 100px;
+            }
+
+            .contact-form {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img src="https://media-hosting.imagekit.io/e59ffab1c5c04df5/ChatGPT_Image_Apr_28__2025__11_24_37_AM-removebg-preview.png?Expires=1840427753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Nn9Qm75pXzGgwpfCUIhkIP1xTGqcsAPG0Ae6ju8ITBz4ksesYHDVW379WiMy9QVXc8ZjzKO96q293-cqcN~VeE97~3NqKkUYQO2EhmlGG-8IEgfj~5SLG~rmEEw3ED4oluPlRKxdukBJ8SQOmsWxqc0QF82MHvo9GCa00UBGniEPSKvu-4OC1k1MaPrQWaJzdQ3KfgyVKLLeVSv0u4j040g1gAoJCP1o4dk5kFdRvAVN0Fsq3Yo9ZENlsbl0iwnbMTqs6RJ--Agv1a6hgUTrvEbhlCevyvPMNZDp~gRQgBmO50z0v2xLG1OtjRvHt5OwO-nJSLTKNs-1HptohLDn7Q__" alt="Golden Life Logo"></a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Golden Life Old Age Home</h1>
+            <p>A vibrant community where seniors enjoy care, comfort, and companionship in their golden years.</p>
+            <a href="#contact" class="cta-button">Join Our Family</a>
+        </div>
+    </section>
+
+    <section class="about section" id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>About Us</h2>
+                <p>At Golden Life, we don't just offer care — we offer a second home. Here, every senior becomes part of our big, warm family. Our mission is simple: to fill every day with joy, dignity, and heartfelt connections. With over 10 years of love and experience behind us, our compassionate team is dedicated to making every resident feel truly seen, heard, and cherished.</p>
+            </div>
+            <img src="https://media.istockphoto.com/id/1649298438/photo/joyful-retired-couple-hiking.jpg?s=612x612&w=0&k=20&c=WaLp_3lLX2s8KdO0Abxw4_ihXxl-vU132BVrp6arcS0=" alt="Seniors smiling together">
+        </div>
+    </section>
+
+    <section class="services section" id="services">
+        <div class="services-content">
+            <h2>Our Services</h2>
+            <p style="color: #c0c0c0;">At Golden Life, we offer a range of services tailored to meet the unique needs of our senior residents, ensuring their physical, emotional, and social well-being.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/2207787234/photo/happy-senior-woman-and-nurse-during-home-visit-looking-at-camera.jpg?s=612x612&w=0&k=20&c=s38DB1jNsYjzGlISs9btyipNNtK6fayn6lu-J37cl-w=" alt="Caregiver helping senior">
+                    <h3>24/7 Care</h3>
+                    <p>Compassionate, professional support at all hours — from daily activities to health monitoring and medication management, your loved ones are always in safe hands.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/2204828270/photo/happy-retired-senior-indian-couple-eating-healthy-breakfast-together-romantic-elderly-husband.jpg?s=612x612&w=0&k=20&c=inii6Iw2JGqMl_glI4CyaN6Ih3p-__DrUEQjdh-S0V8=" alt="Healthy senior meal">
+                    <h3>Nutritious Meals</h3>
+                    <p>Fresh, balanced, and delicious meals crafted with seniors’ health and taste in mind. Every bite is served with a side of warmth and community spirit.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/1455018915/photo/old-men-friends-playing-with-ball-at-park.jpg?s=612x612&w=0&k=20&c=CA4Ndr7FwsLA4yPyasm6ACrA3ZLKy4P_OF64lCBRAiA=" alt="Seniors in activities">
+                    <h3>Recreational Activities</h3>
+                    <p>Life stays vibrant here! Music, art, yoga, games, and more — our activities are designed to bring joy, build friendships, and keep spirits soaring.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://media.istockphoto.com/id/2198222002/photo/caring-nurse-assisting-elderly-man-with-walker.jpg?s=612x612&w=0&k=20&c=jPk0nO8QMx2y6x4dECc6V0pyHRO9gsxZGtd1bZabUSQ=" alt="Safe senior living space">
+                    <h3>Safe & Comfortable Spaces</h3>
+                    <p>Spacious rooms, cozy lounges, and lush gardens — every corner is built for safety, ease, and peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog section" id="blog">
+        <h2>Our Blog</h2>
+        <p>Stay connected with inspiring stories, health tips, and insights into the world of senior living.</p>
+        <div class="blog-posts">
+            <div class="blog-card">
+                <img src="https://media.istockphoto.com/id/1413583709/photo/cheerful-senior-having-fun-while-taking-selfie-at-retirement-community.jpg?s=612x612&w=0&k=20&c=nYFvWrL80Zh9DCDbBJNO5DnUQQv9qliQfBjLfFcymCc=" alt="Seniors enjoying activities">
+                <h3>The Joy of Staying Active</h3>
+                <p>Small steps, big smiles — discover how simple activities can bring energy and happiness into everyday life.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://media.istockphoto.com/id/1281039890/photo/senior-elderly-caucasian-couple-drinking-coffee-looking-ahead-in-porch-at-home-mature-family.jpg?s=612x612&w=0&k=20&c=67urI81eU2vDkg4mnYxjY1bSAcFDZOnzLupDThtKako=" alt="Senior couple">
+                <h3>Building Bonds in Later Years</h3>
+                <p>Friendship knows no age. See how we create a community full of laughter, love, and meaningful connections.</p>
+            </div>
+            <div class="blog-card">
+                <img src="https://media.istockphoto.com/id/595140538/photo/eating-healthy-feeling-good.jpg?s=612x612&w=0&k=20&c=hl8OS95fwZF9PXCLqwptiI9tbjUfAZEZt23QxrWe1VE=" alt="Healthy eating for seniors">
+                <h3>Nutrition Tips for Seniors</h3>
+                <p>Food that fuels life — practical advice on eating well to stay vibrant and healthy.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Get in touch with us to learn more about how we can support your loved ones.</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.045725021328!2d-122.4194155849058!3d37.77492997975906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sin!4v1632154819212!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Golden Life Old Age Home | Contact: +91-123-456-7890 | Email: info@goldenlife.com</p>
+        <!-- <img src="https://cdn.pixabay.com/photo/2017/08/07/14/02/people-2604165_1280.jpg" alt="Seniors in a serene environment"> -->
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
